@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <time.h>
 /**
- * main-Program entry piont
+ *main-Program entry piont
  *
- * Return: 0-no error, non-zero if errors.
+ *Return: 0-no error, non-zero if errors.
  */
 int main(void)
 {
