@@ -1,8 +1,9 @@
 #include <stdio.h>
+
 /**
- * main = prints the alphabets
- * Description count out the alphabets  
- * Return: always 0 (success)
+ * main - Prints the alphabet.
+ **
+ * Return: Always 0 (Success)
  */
 int main(void)
 {
