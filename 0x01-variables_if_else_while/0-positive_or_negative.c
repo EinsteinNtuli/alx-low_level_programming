@@ -1,7 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
+/**
+ * main-Program entry piont
+ *
+ * Return: 0-no error, non-zero if errors.
+ */
 int main(void)
 {
 
@@ -10,7 +14,7 @@ int main(void)
 	srand(time(0));
        	n = rand() - RAND_MAX / 2;
 
-	printf("%i ", n);
+	printf("%i ", n)
 
 	if (n > 0)
 	{
