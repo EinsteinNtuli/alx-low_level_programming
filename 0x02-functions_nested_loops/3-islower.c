@@ -1,8 +1,8 @@
 #include "main.h"
 
 /**
- * islower(int c)
- *
+ * _islower - a function that is goint to determine the result
+ * @c: parameter
  * Return: 0
  */
 int _islower(int c)
@@ -13,4 +13,4 @@ int _islower(int c)
 	}
 	else
 		return (0);
-}	
+}
