@@ -1,4 +1,4 @@
-#include "main"
+#include "main.h"
 
 /**
  *
@@ -7,7 +7,7 @@
  */
 void print_alphabet_x10(void)
 {
-	int t;
+	int i;
 	i = 0;
 
 	while (i < 11)
@@ -16,8 +16,9 @@ void print_alphabet_x10(void)
 
 		for (r = 'a'; r <= 'z'; r++)
 		{
-			_putchar(r)
+			_putchar(r);
 		}
-		_putchar('\n);
+		_putchar('\n');
 		i++;
 	}
+}
