@@ -1,47 +1,43 @@
 #include "main.h"
 
 /**
- * _strspn - get the length of a prefix substring
- * @s: the null-terminated string to be scanned
- * @accept: the null_terminated string containing the characters to match
- *
- * Return: the number of bytes in the initial segmentof s witch consist of only bytes from accept
- */
-unsigned int _strspn(char *s,char *accept)
-{
-	unsigned int len = 0
+ * _strspn - Locates a character in a string
+ * @s: This is the main C string to be scanned.
+ * @accept: This is the string containing the list of characters to match in s
+ * Return: return count
+ **/
+unsigned int _strspn(char *s, char *accept)
 
-		if (s == '\0' || accept == '\0')
+{
+	int i, j;
+	int count = 0;
+	char *str1, *str2;
+
+	str1 = s;
+	str2 = accept;
+
+	i = 0;
+	while (str1[i] != '\0') /*Declaring WHILE *s */
+	{
+		j = 0;
+		while (str2[j] != '\0') /*Declaring WHILE *accept*/
 		{
-			return (len);
-		}
-
-	while (*s && _strchr(accept, *s++))
-	{
-		len++;
-	}
-	return (len);
-}
-/**
- * _strchr - locates a character in a string
- * @s: pointer
- * @c: character to locate 
- *
- * Return: pointer to the first occurrenceof the character c
- */
-char *_strchr(chr *s, char c)
-{
-	char *char_find = '\0';
-
-	if (S != '\0')
-	{
-		do {
-			if (*s == (char)c)
+			if (str2[j] == str1[i]) /*Evaluate condition*/
 			{
-				char_find = s;
+				count++; /*count number*/
 				break;
 			}
-		} while (*s++);
+
+			j++;    /*add j+1*/
+		}
+
+		if (s[i] != accept[j]) /*If aren't equals*/
+		{
+			break;
+		}
+
+		i++; /*add x+1*/
 	}
-	return (char_find);
+
+	return (count); /*return the value of count*/
 }
