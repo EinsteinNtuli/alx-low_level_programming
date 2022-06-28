@@ -1,64 +1,39 @@
 #include "main.h"
+#include <stdlib.h>
+#include <string.h>
 
 /**
- * _strlen - Finds length of string
- * @s: string to check
- *
- * Return: counter
- */
-int _strlen(char *s)
-{
-	unsigned int i;
-
-	i = 0;
-	while (s[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
-}
-/**
- * str_concat - Concatenates two strings
- * @s1: destinstion string
- * @s2: source string
- *
- * Return: pointer to new memory string
+ * str_concat - concatenates two strings, using dynamic memory allocation.
+ * @s1: string1
+ * @s2: string
+ * Return: NULLL on failure
  */
 char *str_concat(char *s1, char *s2)
 {
-	char *s;
 	int i;
-	int len1;
-	int len2;
-	int size;
+	int lens1 = strlen(s1);
+	int lens2 = strlen(s2);
+	int size = lens1 + lens2 + 1;
+	char *s = malloc(sizeof(char) * size);
+	char *str1;
 
-	if (s1 == NULL)
-	{
-		s1 = "";
-	}
-	if (s2 == NULL)
-	{
-		s2 = "";
-	}
-	len1 = _strlen(s1);
-	len2 = _strlen(s2);
-	size = len1 + len2 + 1;
-	s = malloc(size * sizeof(char));
-	if (s == 0)
-	{
+	str1 = s;
+	if (s == NULL)
 		return (NULL);
-	}
-	else
+
+	for (i = 0; i < (lens1 + lens2); i++)
 	{
-		for (i = 0; i < len1; i++)
+		if (i < lens1)
 		{
-			s[i] = s1[i];
+			s[i] = *s1;
+			s1++;
 		}
-		for (i = 0; i < len2; i++)
+		else
 		{
-			s[len1 + i] = s2[i];
+			s[i] = *s2;
+			s2++;
 		}
-		s[size - 1] = '\0';
-		return (s);
 	}
+	s[i] = '\0';
+	return (str1);
 }
