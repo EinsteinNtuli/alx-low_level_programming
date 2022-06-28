@@ -1,66 +1,64 @@
 #include "main.h"
-#include "stdlib.h"
-/**
- *str_concat-concanates 2 strings.
- *@s1:First string.
- *@s2:second string.
- *Return: Pointer to memory containing concatenated string.
- */
 
+/**
+ * _strlen - Finds length of string
+ * @s: string to check
+ *
+ * Return: counter
+ */
+int _strlen(char *s)
+{
+	unsigned int i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
+}
+/**
+ * str_concat - Concatenates two strings
+ * @s1: destinstion string
+ * @s2: source string
+ *
+ * Return: pointer to new memory string
+ */
 char *str_concat(char *s1, char *s2)
 {
-	int size, j, k, size2;
-	char *memstorage;
+	char *s;
+	int i;
+	int len1;
+	int len2;
+	int size;
 
-	size = _strlen(s1);
-	size2 = _strlen(s2);
 	if (s1 == NULL)
 	{
 		s1 = "";
 	}
-	if (s1 == NULL)
+	if (s2 == NULL)
 	{
 		s2 = "";
 	}
-
-/*allocate memory for the full string.*/
-	memstorage = malloc(size + size2);
-	if (memstorage == NULL)
+	len1 = _strlen(s1);
+	len2 = _strlen(s2);
+	size = len1 + len2 + 1;
+	s = malloc(size * sizeof(char));
+	if (s == 0)
 	{
 		return (NULL);
 	}
-
-/*copy string one into memory.*/
-	for (j = 0; j < size; j++)
+	else
 	{
-		memstorage[j] = s1[j];
+		for (i = 0; i < len1; i++)
+		{
+			s[i] = s1[i];
+		}
+		for (i = 0; i < len2; i++)
+		{
+			s[len1 + i] = s2[i];
+		}
+		s[size - 1] = '\0';
+		return (s);
 	}
-/*copy string two into memory.*/
-	for (k = 0; k < size2; k++)
-	{
-		memstorage[j] = s2[k];
-		j++;
-	}
-/*Put null character at the end of the string.*/
-	memstorage[++j] = '\0';
-	return (memstorage);
-}
-
-
-/**
- *_strlen-Finds the length of a string.
- *@s:String pointer to the string whose length is to be found.
- *
- *Return: returns the length of the string.
- */
-
-int _strlen(char *s)
-{
-	int p = 0;
-/*incremeant up to when the last character is NULL,\0*/
-	while (*(s + p) != 0)
-	{
-		p++;
-	}
-	return (p);
 }
