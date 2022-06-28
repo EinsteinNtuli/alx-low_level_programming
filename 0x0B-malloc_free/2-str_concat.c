@@ -1,39 +1,30 @@
-#include "main.h"
 #include <stdlib.h>
-#include <string.h>
-
 /**
- * str_concat - concatenates two strings, using dynamic memory allocation.
- * @s1: string1
- * @s2: string
- * Return: NULLL on failure
+ * str_concat - concatenates two strings
+ * @str1: first string
+ * @str2: second string
+ * Return: pointer to a buffer containing str1 & str2
  */
-char *str_concat(char *s1, char *s2)
+char *str_concat(char *str1, char *str2)
 {
+	char *p;
+	int str1count, str2count;
+	int sizeBuffer;
 	int i;
-	int lens1 = strlen(s1);
-	int lens2 = strlen(s2);
-	int size = lens1 + lens2 + 1;
-	char *s = malloc(sizeof(char) * size);
-	char *str1;
 
-	str1 = s;
-	if (s == NULL)
+	if (str1 == NULL)
+		str1 = "";
+	if (str2 == NULL)
+		str2 = "";
+	for (str1count = 0; str1[str1count]; str1count++)
+		;
+	for (str2count = 0; str2[str2count]; str2count++)
+		;
+	sizeBuffer = str1count + str2count + 1;
+	p = malloc(sizeBuffer * sizeof(char));
+	if (p == NULL)
 		return (NULL);
-
-	for (i = 0; i < (lens1 + lens2); i++)
-	{
-		if (i < lens1)
-		{
-			s[i] = *s1;
-			s1++;
-		}
-		else
-		{
-			s[i] = *s2;
-			s2++;
-		}
-	}
-	s[i] = '\0';
-	return (str1);
+	for (i = 0; i < sizeBuffer; i++)
+		i < str1count ? p[i] = str1[i] : (p[i] = str2[i - str1count]);
+	return (p);
 }
