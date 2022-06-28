@@ -1,32 +1,39 @@
 #include "main.h"
 #include <stdlib.h>
+#include <string.h>
 
 /**
- * alloc_grid - function that returns a pointer to a 2D
- * array of integers.
- * @width: array columns
- * @height: array rows
- * Return: pointer to the array, NULL on failure
+ * str_concat - concatenates two strings, using dynamic memory allocation.
+ * @s1: string1
+ * @s2: string
+ * Return: NULLL on failure
  */
-int **alloc_grid(int width, int height)
+char *str_concat(char *s1, char *s2)
 {
-	int **arr;
-	int i = 0, j = 0;
+	int i;
+	int lens1 = strlen(s1);
+	int lens2 = strlen(s2);
+	int size = lens1 + lens2 + 1;
+	char *s = malloc(sizeof(char) * size);
+	char *str1;
 
-	if (width <= 0 || height <= 0)
-		return (NULL);
-	arr = (int **)malloc(sizeof(int *) * height);
-	if (arr == NULL)
+	str1 = s;
+	if (s == NULL)
 		return (NULL);
 
-	for (; i < height; i++)
+	for (i = 0; i < (lens1 + lens2); i++)
 	{
-		arr[i] = (int *)malloc(sizeof(int) * width);
-		if (arr[i] == NULL)
-			return (NULL);
+		if (i < lens1)
+		{
+			s[i] = *s1;
+			s1++;
+		}
+		else
+		{
+			s[i] = *s2;
+			s2++;
+		}
 	}
-	for (i = 0; i < height; i++)
-		for (; j < width; j++)
-			arr[i][j] = 0;
-	return (arr);	
+	s[i] = '\0';
+	return (str1);
 }
