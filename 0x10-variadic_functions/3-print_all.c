@@ -1,53 +1,85 @@
-#include <stdarg.h>
+#include "variadic_functions.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include "variadic_functions.h"
 
 /**
- * print_all - function that prints anything.
- * @format: list of types of arguments passed to the function
- * Return: Nothing
+ * print_int - prints int
+ * @list: arguments from print_all
  */
+void print_int(va_list list)
+{
+	printf("%d", va_arg(list, int));
+}
+
+/**
+ * print_float - prints float
+ * @list: arguments from print_all
+ */
+void print_float(va_list list)
+{
+	printf("%f", va_arg(list, double));
+}
+
+/**
+ * print_char - prints int
+ * @list: arguments from print_all
+ */
+void print_char(va_list list)
+{
+	printf("%c", va_arg(list, int));
+}
+
+/**
+ * print_str - prints string
+ * @list: arguments from print_all
+ */
+void print_str(va_list list)
+{
+	char *s = va_arg(list, char *);
+
+	s == NULL ? printf("(nil)") : printf("%s", s);
+
+}
+
+/**
+ * print_all - prints any type
+ * @format: arguments to print
+ */
+
 void print_all(const char * const format, ...)
 {
-	va_list all;
-	char *str;
-	int j;
+va_list list;
+int i = 0, j = 0;
+char *sep = "";
 
-	va_start(all, format);
-	while (format == NULL)
+printTypeStruct printType[] = {
+	{ "i", print_int },
+	{ "f", print_float },
+	{ "c", print_char },
+	{ "s", print_str },
+	{NULL, NULL}
+};
+
+
+va_start(list, format);
+
+while (format && format[i])
+{
+	j = 0;
+	while (j < 4)
 	{
-		printf("\n");
-		return;
-	}
-	while (format[j])
-	{
-		switch (format[j])
+		if (*printType[j].type == format[i])
 		{
-			case 'c':
-				printf("%c", (char) va_arg(all, int));
-				break;
-			case 'i':
-				printf("%d", va_arg(all, int));
-				break;
-			case 'f':
-				printf("%f", (float) va_arg(all, double));
-				break;
-			case 's':
-				str = va_arg(all, char*);
-				if (str != NULL)
-				{
-					printf("%s", str);
-					break;
-				}
-				printf("(nil)");
-				break;
+			printf("%s", sep);
+			printType[j].printer(list);
+			sep = ", ";
+			break;
 		}
-		if ((format[j] == 'c' || format[j] == 'i' || format[j] == 'f' ||
-				format[j] == 's') && format[(j + 1)] != '\0')
-			printf(", ");
 		j++;
 	}
-	va_end(all);
-	printf("\n");
+	i++;
+}
+
+printf("\n");
+va_end(list);
 }
